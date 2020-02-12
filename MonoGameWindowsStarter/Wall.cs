@@ -13,7 +13,7 @@ namespace MonoGameWindowsStarter
 {
     class Wall
     {
-        Game2 game;
+        Game game;
         public BoundingRectangle Bounds;
         Texture2D texture;
         public bool isBombable;
@@ -21,7 +21,7 @@ namespace MonoGameWindowsStarter
 
         //Idea for next project: Invisible/Appearing Walls
 
-        public Wall(Game2 game)
+        public Wall(Game game)
         {
             this.game = game;
         }

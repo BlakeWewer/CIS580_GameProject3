@@ -13,12 +13,12 @@ namespace MonoGameWindowsStarter
 {
     class Maze
     {
-        Game2 game;
+        Game game;
         public List<Wall> walls = new List<Wall>();
         public List<Spike> spikes = new List<Spike>();
         public Vector2 startingPosition;
 
-        public Maze(Game2 game)
+        public Maze(Game game)
         {
             this.game = game;
         }

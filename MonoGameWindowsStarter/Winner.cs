@@ -13,11 +13,11 @@ namespace MonoGameWindowsStarter
 {
     class Winner
     {
-        Game2 game;
+        Game game;
         Texture2D winner;
         public BoundingCircle Bounds;
 
-        public Winner(Game2 game)
+        public Winner(Game game)
         {
             this.game = game;
         }

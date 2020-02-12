@@ -11,7 +11,7 @@ namespace MonoGameWindowsStarter
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game2 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -34,7 +34,7 @@ namespace MonoGameWindowsStarter
         KeyboardState keyboardState;
         KeyboardState oldkeyboardState;
 
-        public Game2()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

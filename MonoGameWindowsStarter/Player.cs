@@ -44,7 +44,7 @@ namespace MonoGameWindowsStarter
         const int FRAME_HEIGHT_GAP = 25;
 
         // Other variables
-        Game2 game;
+        Game game;
         Texture2D texture;
         Texture2D powerUpBar;
         Texture2D powerUpBarBack;
@@ -67,7 +67,7 @@ namespace MonoGameWindowsStarter
         /// Creates a new player object
         /// </summary>
         /// <param name="game"></param>
-        public Player(Game2 game)
+        public Player(Game game)
         {
             this.game = game;
             timer = new TimeSpan(0);

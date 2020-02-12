@@ -13,11 +13,11 @@ namespace MonoGameWindowsStarter
 {
     class GameOver
     {
-        Game2 game;
+        Game game;
         Texture2D game_over;
         public BoundingCircle Bounds;
 
-        public GameOver(Game2 game)
+        public GameOver(Game game)
         {
             this.game = game;
         }

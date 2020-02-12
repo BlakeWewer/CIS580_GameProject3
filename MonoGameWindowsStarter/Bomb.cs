@@ -13,7 +13,7 @@ namespace MonoGameWindowsStarter
 {
     class Bomb
     {
-        Game2 game;
+        Game game;
         TimeSpan activated_timer;
         TimeSpan detonated_timer;
         TimeSpan timer;
@@ -28,7 +28,7 @@ namespace MonoGameWindowsStarter
         public bool toDetonate;
         public bool detonated;
 
-        public Bomb(Game2 game)
+        public Bomb(Game game)
         {
             this.game = game;
         }

@@ -13,7 +13,7 @@ namespace MonoGameWindowsStarter
 {
     class Spike
     {
-        Game2 game;
+        Game game;
         Texture2D texture;
         public BoundingCircle Bounds;
         TimeSpan timer;
@@ -23,7 +23,7 @@ namespace MonoGameWindowsStarter
         public bool destroyed;
         public SoundEffect exposedSFX;
 
-        public Spike(Game2 game)
+        public Spike(Game game)
         {
             this.game = game;
             timer = new TimeSpan(0);
