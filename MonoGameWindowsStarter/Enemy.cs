@@ -13,8 +13,8 @@ namespace MonoGameWindowsStarter
 {
     public class Enemy
     {
-        Game game;
-        Texture2D texture;
+        public Game game;
+        public Texture2D texture;
         public BoundingRectangle Bounds;
         public bool destroyed;
 
@@ -29,6 +29,6 @@ namespace MonoGameWindowsStarter
         }
         public virtual void LoadContent() { }
         public virtual void Update() { }
-        public virtual void Draw() { }
+        public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }
