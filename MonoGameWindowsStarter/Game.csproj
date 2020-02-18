@@ -44,10 +44,13 @@
     <Compile Include="Bomb.cs" />
     <Compile Include="BoundingCircle.cs" />
     <Compile Include="BoundingRectangle.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="Collisions.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameOver.cs" />
+    <Compile Include="iCollidable.cs" />
+    <Compile Include="iUpdateable.cs" />
     <Compile Include="Maze.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

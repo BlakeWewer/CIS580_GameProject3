@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameWindowsStarter
 {
-    class Player
+    class Player : iUpdateable, iCollidable
     {
         public enum State
         {
@@ -54,7 +54,7 @@ namespace MonoGameWindowsStarter
         TimeSpan timer;
         int frame;
         public BoundingRectangle Bounds;
-        public Vector2 Position;
+        public Vector2 curPosition;
         TimeSpan powerUpTimer;
         public Bomb bomb;
         public SoundEffect ouchSFX;
@@ -72,8 +72,8 @@ namespace MonoGameWindowsStarter
         {
             this.game = game;
             timer = new TimeSpan(0);
-            Position = new Vector2(2, 352);
-            Bounds = new BoundingRectangle(Position.X, Position.Y, 32, 45);
+            curPosition = new Vector2(2, 352);
+            Bounds = new BoundingRectangle(curPosition.X, curPosition.Y, 32, 45);
             state = State.Idle;
             prev_state = State.Idle;
             powerUpTimer = new TimeSpan(0);
@@ -145,34 +145,34 @@ namespace MonoGameWindowsStarter
             {
                 prev_state = state;
                 state = State.North;
-                Position.Y -= delta * PLAYER_SPEED;
+                curPosition.Y -= delta * PLAYER_SPEED;
             }
             else if (keyboard.IsKeyDown(Keys.Left))
             {
                 prev_state = state;
                 state = State.West;
-                Position.X -= delta * PLAYER_SPEED;
+                curPosition.X -= delta * PLAYER_SPEED;
             }
             else if (keyboard.IsKeyDown(Keys.Right))
             {
                 prev_state = state;
                 state = State.East;
-                Position.X += delta * PLAYER_SPEED;
+                curPosition.X += delta * PLAYER_SPEED;
             }
             else if (keyboard.IsKeyDown(Keys.Down))
             {
                 prev_state = state;
                 state = State.South;
-                Position.Y += delta * PLAYER_SPEED;
+                curPosition.Y += delta * PLAYER_SPEED;
             }
             else
             {
                 state = State.Idle;
             }
 
-            if(Position.X < 0)
+            if(curPosition.X < 0)
             {
-                Position.X = 0;
+                curPosition.X = 0;
             }
 
             // Update the player animation timer when the player is moving
@@ -192,8 +192,8 @@ namespace MonoGameWindowsStarter
             // Keep the frame within Bounds (there are four frames)
             frame %= 4;
 
-            Bounds.X = Position.X;
-            Bounds.Y = Position.Y;
+            Bounds.X = curPosition.X;
+            Bounds.Y = curPosition.Y;
         }
 
         /// <summary>
@@ -245,6 +245,11 @@ namespace MonoGameWindowsStarter
             // render the sprite
             spriteBatch.Draw(texture, Bounds, source, Color.White);
 
+        }
+
+        public Vector2 Position()
+        {
+            return new Vector2(Bounds.X, Bounds.Y);
         }
     }
 }

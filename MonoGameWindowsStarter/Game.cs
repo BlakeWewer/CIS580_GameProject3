@@ -33,8 +33,7 @@ namespace MonoGameWindowsStarter
         Winner winner;
         KeyboardState keyboardState;
         KeyboardState oldkeyboardState;
-
-        List<Object> _objects;
+        List<iUpdateable> updateable;
 
         public Game()
         {
@@ -61,81 +60,7 @@ namespace MonoGameWindowsStarter
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = 1042;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.ApplyChanges();
-
-            _objects.Add(player);
-            List<Tuple<int, int>> level1WallPositions = new List<Tuple<int, int>>();
-            List<Tuple<int, int>> level1SpikePositions = new List<Tuple<int, int>>();
-            //StreamReader wallReader1 = new StreamReader("../../../../../Level1WallPlacements.txt");
-            string rawWall1 = Properties.Resources.Level1WallPlacements;
-            string rawSpike1 = Properties.Resources.Level1SpikePlacements;
-            string[] values;
-            string[] line = rawWall1.Split('\n');            
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level1WallPositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            line = rawSpike1.Split('\n');
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level1SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            level1.Initialize(level1WallPositions, level1SpikePositions, new Vector2(1, 351));
-            levels.Add(0, level1);
-
-            List<Tuple<int, int>> level2WallPositions = new List<Tuple<int, int>>();
-            List<Tuple<int, int>> level2SpikePositions = new List<Tuple<int, int>>();
-            string rawWall2 = Properties.Resources.Level2WallPlacements;
-            string rawSpike2 = Properties.Resources.Level2SpikePlacements;
-            line = rawWall2.Split('\n');
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level2WallPositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            line = rawSpike2.Split('\n');
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level2SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            level2.Initialize(level2WallPositions, level2SpikePositions, new Vector2(1, 351));
-            level2.MakeWallBombable(new Tuple<int, int>(11, 10));
-            levels.Add(1, level2);
-
-            List<Tuple<int, int>> level3WallPositions = new List<Tuple<int, int>>();
-            List<Tuple<int, int>> level3SpikePositions = new List<Tuple<int, int>>();
-            string rawWall3 = Properties.Resources.Level3WallPlacements;
-            string rawSpike3 = Properties.Resources.Level3SpikePlacements;
-            line = rawWall3.Split('\n');
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level3WallPositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            line = rawSpike3.Split('\n');
-            foreach (string pair in line)
-            {
-                values = pair.Split(' ');
-                level3SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
-                                                            Convert.ToInt32(values[1])));
-            }
-            level3.Initialize(level3WallPositions, level3SpikePositions, new Vector2(1, 651));
-            level3.MakeWallBombable(new Tuple<int, int>(19, 7));
-            levels.Add(2, level3);
-
-            for(int i = 0; i < levels.Count; i++)
-            {
-                _objects.Add(levels[i]);
-            }
-            
+            graphics.ApplyChanges();            
 
             gameOver.Initialize(graphics);
             winner.Initialize(graphics);
@@ -153,12 +78,78 @@ namespace MonoGameWindowsStarter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.LoadContent();
             scoreFont = Content.Load<SpriteFont>("defaultFont");
-            level1.LoadContent();
-            level2.LoadContent();
-            level3.LoadContent();
+
+            List<Tuple<int, int, int>> level1WallPositions = new List<Tuple<int, int, int>>();
+            List<Tuple<int, int>> level1SpikePositions = new List<Tuple<int, int>>();
+            //StreamReader wallReader1 = new StreamReader("../../../../../Level1WallPlacements.txt");
+            string rawWall1 = Properties.Resources.Level1WallPlacements;
+            string rawSpike1 = Properties.Resources.Level1SpikePlacements;
+            string[] values;
+            string[] line = rawWall1.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level1WallPositions.Add(new Tuple<int, int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1]),
+                                                            Convert.ToInt32(values[2])));
+            }
+            line = rawSpike1.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level1SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1])));
+            }
+            levels.Add(0, level1);
+
+            List<Tuple<int, int, int>> level2WallPositions = new List<Tuple<int, int, int>>();
+            List<Tuple<int, int>> level2SpikePositions = new List<Tuple<int, int>>();
+            string rawWall2 = Properties.Resources.Level2WallPlacements;
+            string rawSpike2 = Properties.Resources.Level2SpikePlacements;
+            line = rawWall2.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level2WallPositions.Add(new Tuple<int, int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1]),
+                                                            Convert.ToInt32(values[2])));
+            }
+            line = rawSpike2.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level2SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1])));
+            }
+            levels.Add(1, level2);
+
+            List<Tuple<int, int, int>> level3WallPositions = new List<Tuple<int, int, int>>();
+            List<Tuple<int, int>> level3SpikePositions = new List<Tuple<int, int>>();
+            string rawWall3 = Properties.Resources.Level3WallPlacements;
+            string rawSpike3 = Properties.Resources.Level3SpikePlacements;
+            line = rawWall3.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level3WallPositions.Add(new Tuple<int, int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1]),
+                                                            Convert.ToInt32(values[2])));
+            }
+            line = rawSpike3.Split('\n');
+            foreach (string pair in line)
+            {
+                values = pair.Split(' ');
+                level3SpikePositions.Add(new Tuple<int, int>(Convert.ToInt32(values[0]),
+                                                            Convert.ToInt32(values[1])));
+            }
+            levels.Add(2, level3);
+            level1.LoadContent(level1WallPositions, level1SpikePositions, new Vector2(1, 351), new Vector2(1001, 351));
+            level2.LoadContent(level2WallPositions, level2SpikePositions, new Vector2(1, 351), new Vector2(1001, 651));
+            level3.LoadContent(level3WallPositions, level3SpikePositions, new Vector2(1, 651), new Vector2(1001, 201));
             gameOver.LoadContent();
             winner.LoadContent();
             // TODO: use this.Content to load your game content here
+
         }
 
         /// <summary>
@@ -179,7 +170,7 @@ namespace MonoGameWindowsStarter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            updateable = new List<iUpdateable>();
 
             oldkeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
@@ -191,9 +182,13 @@ namespace MonoGameWindowsStarter
             {
                 PreviousLevel();
             }
-            if (keyboardState.IsKeyDown(Keys.A) && !oldkeyboardState.IsKeyDown(Keys.A))
+            if (keyboardState.IsKeyDown(Keys.E) && !oldkeyboardState.IsKeyDown(Keys.E))
             {
-                player.Position = new Vector2(19 * 50 + 1, 4 * 50 + 1);
+                player.curPosition = current_maze.endingPosition;
+            }
+            if (keyboardState.IsKeyDown(Keys.S) && !oldkeyboardState.IsKeyDown(Keys.S))
+            {
+                player.curPosition = current_maze.startingPosition;
             }
 
             if (!win && !game_over)
@@ -205,54 +200,100 @@ namespace MonoGameWindowsStarter
                 }
                 
                 current_maze = levels[current_level];
-                // TODO: Add your update logic here
-                player.Update(gameTime);
-                current_maze.Update(gameTime);
 
-                foreach (Wall wall in current_maze.walls)
+                // TODO: Add your update logic here
+                updateable.Add(player);
+                foreach(Spike spike in current_maze.spikes)
                 {
-                    if (player.Bounds.CollidesWith(wall.Bounds) && !wall.destroyed)
+                    updateable.Add(spike);
+                }
+                foreach(Cell cell in current_maze.cells)
+                {
+                    updateable.Add(cell);
+                }
+                foreach (iUpdateable obj in updateable)
+                {
+                    obj.Update(gameTime);
+                }
+
+                foreach(Cell cell in current_maze.getNearCells(player))
+                {
+                    foreach (iCollidable collidable in cell.collidables)
                     {
-                        float delta;
-                        switch (player.state)
+                        Wall wall = collidable as Wall;
+                        Spike spike = collidable as Spike;
+                        if (wall != null)
                         {
-                            case State.East:
-                                delta = (player.Bounds.X + player.Bounds.Width) - wall.Bounds.X;
-                                player.Position.X = wall.Bounds.X - player.Bounds.Width - delta;
-                                break;
-                            case State.North:
-                                delta = (wall.Bounds.Y + wall.Bounds.Height) - player.Bounds.Y;
-                                player.Position.Y = wall.Bounds.Y + wall.Bounds.Height + delta;
-                                break;
-                            case State.West:
-                                delta = (wall.Bounds.X + wall.Bounds.Width) - player.Bounds.X;
-                                player.Position.X = wall.Bounds.X + wall.Bounds.Width + delta + 1;
-                                break;
-                            case State.South:
-                                delta = (player.Bounds.Y + player.Bounds.Height) - wall.Bounds.Y;
-                                player.Position.Y = wall.Bounds.Y - player.Bounds.Height - delta;
-                                break;
+                            if (player.Bounds.CollidesWith(wall.Bounds) && !wall.destroyed)
+                            {
+                                float delta;
+                                switch (player.state)
+                                {
+                                    case State.East:
+                                        delta = (player.Bounds.X + player.Bounds.Width) - wall.Bounds.X;
+                                        player.curPosition.X = wall.Bounds.X - player.Bounds.Width - delta;
+                                        break;
+                                    case State.North:
+                                        delta = (wall.Bounds.Y + wall.Bounds.Height) - player.Bounds.Y;
+                                        player.curPosition.Y = wall.Bounds.Y + wall.Bounds.Height + delta;
+                                        break;
+                                    case State.West:
+                                        delta = (wall.Bounds.X + wall.Bounds.Width) - player.Bounds.X;
+                                        player.curPosition.X = wall.Bounds.X + wall.Bounds.Width + delta + 1;
+                                        break;
+                                    case State.South:
+                                        delta = (player.Bounds.Y + player.Bounds.Height) - wall.Bounds.Y;
+                                        player.curPosition.Y = wall.Bounds.Y - player.Bounds.Height - delta;
+                                        break;
+                                }
+                            }
+                            if (player.bomb.Explosion.CollidesWith(wall.Bounds) && player.bomb.detonated && !wall.destroyed)
+                            {
+                                if (wall.isBombable)
+                                {
+                                    wall.Bounds.X = -50;
+                                    wall.Bounds.Y = -50;
+                                }
+                            }
                         }
-                    }
-                    if (player.bomb.Explosion.CollidesWith(wall.Bounds) && player.bomb.detonated && !wall.destroyed)
-                    {
-                        if (wall.isBombable)
+                        if (spike != null)
                         {
-                            wall.Bounds.X = -50;
-                            wall.Bounds.Y = -50;
+                            if (player.Bounds.CollidesWith(spike.Bounds) && spike.on)
+                            {
+                                player.ouchSFX.Play(1, 0, 0);
+                                GameOverDeath();
+                            }
+                            if (player.bomb.Explosion.CollidesWith(spike.Bounds) && player.bomb.detonated && spike.on)
+                            {
+                                spike.destroyed = true;
+                            }
                         }
                     }
                 }
-                foreach (Spike spike in current_maze.spikes)
+                foreach (Cell cell in current_maze.getNearCells(player.bomb))
                 {
-                    if (player.Bounds.CollidesWith(spike.Bounds) && spike.on)
+                    foreach (iCollidable collidable in cell.collidables)
                     {
-                        player.ouchSFX.Play(1, 0, 0);
-                        GameOverDeath();
-                    }
-                    if (player.bomb.Explosion.CollidesWith(spike.Bounds) && player.bomb.detonated && spike.on)
-                    {
-                        spike.destroyed = true;
+                        Wall wall = collidable as Wall;
+                        Spike spike = collidable as Spike;
+                        if (wall != null)
+                        {
+                            if (player.bomb.Explosion.CollidesWith(wall.Bounds) && player.bomb.detonated && !wall.destroyed)
+                            {
+                                if (wall.isBombable)
+                                {
+                                    wall.Bounds.X = -50;
+                                    wall.Bounds.Y = -50;
+                                }
+                            }
+                        }
+                        if (spike != null)
+                        {
+                            if (player.bomb.Explosion.CollidesWith(spike.Bounds) && player.bomb.detonated && spike.on)
+                            {
+                                spike.destroyed = true;
+                            }
+                        }
                     }
                 }
                 if (player.Bounds.CollidesWith(player.bomb.Explosion) && player.bomb.detonated)
@@ -274,7 +315,9 @@ namespace MonoGameWindowsStarter
             current_level++;
             if (levels.TryGetValue(current_level, out current_maze))
             {
-                player.Position = current_maze.startingPosition;
+                player.curPosition = current_maze.startingPosition;
+                player.Bounds.X = player.curPosition.X;
+                player.Bounds.Y = player.curPosition.Y;
             }
             else
             {
@@ -290,13 +333,13 @@ namespace MonoGameWindowsStarter
             current_level--;
             if (levels.TryGetValue(current_level, out current_maze))
             {
-                player.Position = current_maze.startingPosition;
+                player.curPosition = current_maze.startingPosition;
             }
             else
             {
                 current_level = 0;
                 current_maze = levels[current_level];
-                player.Position = current_maze.startingPosition;
+                player.curPosition = current_maze.startingPosition;
             }
         }
 
@@ -304,9 +347,9 @@ namespace MonoGameWindowsStarter
         {
             game_over = true;
             game_over_score = 0 + sum_score_prev_levels;
-            player.Position = new Vector2(-100, -100);
-            player.Bounds.X = player.Position.X;
-            player.Bounds.Y = player.Position.Y;
+            player.curPosition = new Vector2(-100, -100);
+            player.Bounds.X = player.curPosition.X;
+            player.Bounds.Y = player.curPosition.Y;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameWindowsStarter
 {
-    class Bomb
+    class Bomb : iCollidable
     {
         Game game;
         TimeSpan activated_timer;
@@ -83,6 +83,11 @@ namespace MonoGameWindowsStarter
                 spriteBatch.Draw(explosion, Explosion, Color.White);
             }
             
+        }
+
+        public Vector2 Position()
+        {
+            return new Vector2(Bounds.X, Bounds.Y);
         }
 
         public void Place(Vector2 position)

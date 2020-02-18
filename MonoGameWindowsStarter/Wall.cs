@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameWindowsStarter
 {
-    class Wall
+    class Wall : iCollidable
     {
         Game game;
         public BoundingRectangle Bounds;
@@ -21,9 +21,10 @@ namespace MonoGameWindowsStarter
 
         //Idea for next project: Invisible/Appearing Walls
 
-        public Wall(Game game)
+        public Wall(Game game, Texture2D texture)
         {
             this.game = game;
+            this.texture = texture;
         }
 
         public void Initialize(Vector2 position, bool bombable)
@@ -36,18 +37,15 @@ namespace MonoGameWindowsStarter
             destroyed = false;
         }
 
-        public void LoadContent()
-        {
-            if (isBombable)
-                texture = game.Content.Load<Texture2D>("cracked_wall");
-            else
-                texture = game.Content.Load<Texture2D>("wall");
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             if(!destroyed)
                 spriteBatch.Draw(texture, Bounds, Color.White);
+        }
+
+        public Vector2 Position()
+        {
+            return new Vector2(Bounds.X, Bounds.Y);
         }
     }
 }

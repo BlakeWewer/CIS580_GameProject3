@@ -1,2 +1,10 @@
-﻿- Use the current Wall objects moreso as WallModel objects and have the position of them all stored in Maze.
-	- Maze would then need to do the Collision Checking (keeping track of destroyed boolean)
+﻿Flyweight = DONE
+
+Update Method = DONE
+Implement an interface that states it will have an update function, have spike and player implement it 
+
+
+Spatial Partition = DONE
+Create a partition that allows for collision checking to be done with fewer checks
+	Could use an interface iCollidable
+	Within player, check which cell player is in & check the iCollidables within that cell (Or cells around it).

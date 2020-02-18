@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameWindowsStarter
 {
-    class Spike
+    class Spike : iUpdateable, iCollidable
     {
         Game game;
         Texture2D texture;
@@ -23,11 +23,13 @@ namespace MonoGameWindowsStarter
         public bool destroyed;
         public SoundEffect exposedSFX;
 
-        public Spike(Game game)
+        public Spike(Game game, Texture2D texture, SoundEffect soundFX)
         {
             this.game = game;
             timer = new TimeSpan(0);
             on = false;
+            this.texture = texture;
+            exposedSFX = soundFX;
         }
 
         public void Initialize(Vector2 position)
@@ -37,12 +39,6 @@ namespace MonoGameWindowsStarter
             Bounds.Y = position.Y + Bounds.Radius;
             timer_randomizer = random.Next(2000);
             destroyed = false;
-        }
-
-        public void LoadContent()
-        {
-            texture = game.Content.Load<Texture2D>("spike");
-            exposedSFX = game.Content.Load<SoundEffect>("spikeSFX");
         }
 
         public void Update(GameTime gameTime)
@@ -66,6 +62,11 @@ namespace MonoGameWindowsStarter
            {
                 spriteBatch.Draw(texture, Bounds, Color.White);
            }  
+        }
+
+        public Vector2 Position()
+        {
+            return new Vector2(Bounds.X, Bounds.Y);
         }
     }
 }
