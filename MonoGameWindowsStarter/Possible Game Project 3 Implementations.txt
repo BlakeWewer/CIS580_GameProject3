@@ -1,0 +1,2 @@
+﻿- Use the current Wall objects moreso as WallModel objects and have the position of them all stored in Maze.
+	- Maze would then need to do the Collision Checking (keeping track of destroyed boolean)

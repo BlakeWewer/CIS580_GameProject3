@@ -45,6 +45,7 @@
     <Compile Include="BoundingCircle.cs" />
     <Compile Include="BoundingRectangle.cs" />
     <Compile Include="Collisions.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="Maze.cs" />
@@ -56,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Soldier.cs" />
     <Compile Include="Spike.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Winner.cs" />
@@ -75,6 +77,7 @@
     <Content Include="Level2WallPlacements.txt" />
     <Content Include="Level3SpikePlacements.txt" />
     <Content Include="Level3WallPlacements.txt" />
+    <Content Include="Possible Game Project 3 Implementations.txt" />
     <EmbeddedResource Include="Resources\Level3WallPlacements.txt" />
     <EmbeddedResource Include="Resources\Level3SpikePlacements.txt" />
     <EmbeddedResource Include="Resources\Level2WallPlacements.txt" />

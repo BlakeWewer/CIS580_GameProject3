@@ -34,6 +34,8 @@ namespace MonoGameWindowsStarter
         KeyboardState keyboardState;
         KeyboardState oldkeyboardState;
 
+        List<Object> _objects;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -61,6 +63,7 @@ namespace MonoGameWindowsStarter
             graphics.PreferredBackBufferHeight = 768;
             graphics.ApplyChanges();
 
+            _objects.Add(player);
             List<Tuple<int, int>> level1WallPositions = new List<Tuple<int, int>>();
             List<Tuple<int, int>> level1SpikePositions = new List<Tuple<int, int>>();
             //StreamReader wallReader1 = new StreamReader("../../../../../Level1WallPlacements.txt");
@@ -83,7 +86,6 @@ namespace MonoGameWindowsStarter
             }
             level1.Initialize(level1WallPositions, level1SpikePositions, new Vector2(1, 351));
             levels.Add(0, level1);
-
 
             List<Tuple<int, int>> level2WallPositions = new List<Tuple<int, int>>();
             List<Tuple<int, int>> level2SpikePositions = new List<Tuple<int, int>>();
@@ -128,6 +130,12 @@ namespace MonoGameWindowsStarter
             level3.Initialize(level3WallPositions, level3SpikePositions, new Vector2(1, 651));
             level3.MakeWallBombable(new Tuple<int, int>(19, 7));
             levels.Add(2, level3);
+
+            for(int i = 0; i < levels.Count; i++)
+            {
+                _objects.Add(levels[i]);
+            }
+            
 
             gameOver.Initialize(graphics);
             winner.Initialize(graphics);

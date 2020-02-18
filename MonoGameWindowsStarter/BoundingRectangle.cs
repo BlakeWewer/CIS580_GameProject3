@@ -25,6 +25,14 @@ namespace MonoGameWindowsStarter
             this.Height = height;
         }
 
+        public BoundingRectangle(Vector2 position, float width, float height)
+        {
+            this.X = position.X;
+            this.Y = position.Y;
+            this.Width = width;
+            this.Height = height;
+        }
+
         /// <summary>
         /// Cast operator for casting into a Rectangle
         /// </summary>
